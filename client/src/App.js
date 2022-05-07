@@ -1,8 +1,7 @@
 import React from "react";
 import "./App.css";
 import NavBar from "./components/Navbar";
-import {Box, Container, Stack} from "@mui/material";
-import Content from "./components/Content";
+import {Box, Stack} from "@mui/material";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import SignUp from "./components/SignUp.tsx";
 import LogIn from "./components/LogIn.tsx";
