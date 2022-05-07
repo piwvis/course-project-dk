@@ -1,23 +1,27 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import NavBar from "./components/Navbar";
+import {Box, Container, Stack} from "@mui/material";
+import Content from "./components/Content";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import SignUp from "./components/SignUp.tsx";
+import LogIn from "./components/LogIn.tsx";
+import Profile from "./components/Profile";
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-        .then((res) => res.json())
-        .then((data) => setData(data.message));
-  }, []);
-
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{!data ? "Loading..." : data}</p>
-        </header>
-      </div>
+      <Router>
+     <Box>
+             <NavBar/>
+         <Stack direction={"row"} spacing={2} justifyContent={"center"} padding={10}>
+             <Routes>
+                 <Route path="/signup" element={<SignUp/>}/>
+                 <Route path="/login" element={<LogIn/>}/>
+                 <Route path="/profile" element={<Profile/>}/>
+             </Routes>
+         </Stack>
+     </Box>
+      </Router>
   );
 }
 
