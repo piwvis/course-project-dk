@@ -9,7 +9,13 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
-sequelize = new Sequelize(config.database, config.username, config.password, config);
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL);
+}
+else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
 
 fs
   .readdirSync(__dirname)
