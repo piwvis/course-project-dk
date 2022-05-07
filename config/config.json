@@ -18,6 +18,7 @@
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "use_env_variable": "mysql://bf1818f13a23a4:ab3a4078@eu-cdbr-west-02.cleardb.net/heroku_0645b92e99cc350?reconnect=true"
   }
 }
