@@ -2,7 +2,6 @@
   "name": "client",
   "proxy": "http://localhost:3001",
   "version": "0.1.0",
-  "homepage": "https://course-project-dk.herokuapp.com/home",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
