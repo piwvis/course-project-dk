@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require('path');
 const db = require("../models");
-const {user} = require("../models");
+const {user, collection, field} = require("../models");
 
 const PORT = process.env.PORT || 3001;
 
@@ -31,9 +31,54 @@ app.post("/register_user", async(req, res) => {
     }
 })
 
+
+app.post("/create_collection", async(req, res) => {
+    console.log(req.body)
+    const {name, topic, description, image, userId} = req.body
+    const newCollection = await collection.create({
+        name: name,
+        topic: topic,
+        description: description,
+        image: image,
+        userId: userId
+    })
+    try {
+        res.send(newCollection);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+app.post('/select_collections',async(req,res)=>{
+    const collections = await collection.findAll({ where : {userId : req.body._id}});
+    if(collections)
+        {
+            res.send(collections);
+        } else {
+            res.status(400).json({ error : "Password Incorrect" });
+        }
+});
+
+app.post("/create_fields", async(req, res) => {
+    console.log(req.body)
+    const {fields, collectionId} = req.body
+    for (const field1 of fields) {
+        const newField= await field.create({
+            type: field1.type,
+            name: field1.fieldName,
+            collectionId: collectionId
+        })
+        try {
+            res.send(newField);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
+})
+
 app.post('/login_user',async(req,res)=>{
     const authorizedUser = await user.findOne({ where : {userName : req.body.name }});
-    if(user){
+    if(authorizedUser){
         if(req.body.password === authorizedUser.password ){
             res.send(authorizedUser);
         } else {

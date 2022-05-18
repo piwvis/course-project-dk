@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import {useDropzone} from "react-dropzone";
 import {StyledDragDrop} from "../styled/StyledDragDrop";
-import {Image} from "cloudinary-react";
 
 function DragDrop(props) {
     const [uploadedFiles, setUploadedFiles] = useState()
@@ -28,11 +27,9 @@ function DragDrop(props) {
     })
 
     return (
-        <StyledDragDrop>
-            <div {...getRootProps()}>
+        <StyledDragDrop  {...getRootProps()}>
                 <input {...getInputProps()} />
-                Image Drop Zone</div>
-            <Image cloudName={cloudName} publicId={photoId} width={"300"} crop={"scale"}/>
+            <span>Image Drop Zone</span>
         </StyledDragDrop>
     );
 }

@@ -8,6 +8,7 @@ import {signUpUser} from "../redux/auth-reducer";
 import {StyledTextField} from "./styled/StyledTextField"
 // @ts-ignore
 import {StyledButton} from "./styled/StyledButton"
+import {Navigate} from "react-router-dom";
 
 function SignUp(props)  {
     const validationSchema = yup.object({username: yup.string().required(), email: yup.string().required(), password: yup.string().required()});
@@ -18,7 +19,7 @@ function SignUp(props)  {
         const errorText = meta.error && meta.touched ? meta.error : "";
         return (<StyledTextField placeholder={placeholder}{...field} helperText={errorText} error={!!errorText}/>);};
 
-    return <>  <Formik validationSchema={validationSchema} validateOnChange={true} initialValues={{username: "", email: "", password: ""}} onSubmit={(data) => props.signUpUser(data)}>
+    return <> {props.isAuth ? <Navigate to="/home" replace={true}/> : <Formik validationSchema={validationSchema} validateOnChange={true} initialValues={{username: "", email: "", password: ""}} onSubmit={(data) => props.signUpUser(data)}>
         {({handleSubmit, values, handleChange}) => (
             <Form onSubmit={handleSubmit}>
                 <div><MyTextField placeholder={"Enter user name"} name={"username"} type={"input"} /></div>
@@ -27,10 +28,12 @@ function SignUp(props)  {
                 <div><StyledButton type={"submit"}>Submit</StyledButton></div>
             </Form>
         )}
-    </Formik>
+    </Formik>}
     </>
 }
 
-const mapStateToProps = (state) => {return {}}
+const mapStateToProps = (state) => {
+    return {isAuth: state.auth.isAuth}
+}
 
 export default connect(mapStateToProps, {signUpUser})(SignUp)

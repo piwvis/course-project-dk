@@ -8,11 +8,12 @@ module.exports = (sequelize, DataTypes) => {
            type: DataTypes.STRING,
            allowNull: false
        },
-       theme: {
-           type: DataTypes.STRING,
-           allowNull: false
-       },
        image: {
+           type: DataTypes.STRING,
+           allowNull: true,
+           defaultValue: ""
+       },
+       topic: {
            type: DataTypes.STRING,
            allowNull: false
        }

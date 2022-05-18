@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {AppBar, Button, Toolbar, InputBase, styled, Typography, Avatar, Box, MenuItem, Menu} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {StyledButton} from "./styled/StyledButton";
 
@@ -29,7 +29,7 @@ function NavBar(props) {
                 <Search><InputBase placeholder={"search..."}/></Search>
                 <Interface>
                     {props.isAuth ? <><Avatar onClick={(e)=>setOpen(true)}/>
-                        <UserMenu open={open} setOpen={setOpen}/>  </>: <>
+                        <UserMenu open={open} setOpen={setOpen}/></>: <>
                         <StyledButton><Link style={{textDecoration: 'none', color: 'black'}} to="/login">Log In</Link></StyledButton>
                         <StyledButton><Link style={{textDecoration: 'none', color: 'black'}} to="/signup">Sign Up</Link></StyledButton>
                     </>}
@@ -55,7 +55,6 @@ const UserMenu = (props) => {
         }}
     >
         <MenuItem ><Link style={{textDecoration: 'none', color:'black'}} to="/profile">Profile</Link></MenuItem>
-        <MenuItem >My account</MenuItem>
         <MenuItem >Logout</MenuItem>
     </Menu>)
 }

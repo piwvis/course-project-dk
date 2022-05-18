@@ -6,8 +6,8 @@ export const StyledDragDrop = styled(Container)(({theme}) => ({
     width: "30%",
     border: 0,
     color: "white",
-    height: 75,
-    padding: "30px 30px",
+    height: 70,
+    padding: "25px 30px",
     margin: "5px",
     [theme.breakpoints.down("sm")]: {
         fontSize: "10px",

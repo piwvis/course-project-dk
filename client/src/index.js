@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from "@mui/material";
 import {theme} from "./themes/theme";
-import store from "./redux/redux-store";
+import store, {Persistor} from "./redux/redux-store";
 import {Provider} from "react-redux";
+import {PersistGate} from 'redux-persist/integration/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Provider store={store}>
           <ThemeProvider theme={theme}>
-              <App />
+              <PersistGate persistor={Persistor}>
+                  <App />
+              </PersistGate>
           </ThemeProvider>
       </Provider>
 

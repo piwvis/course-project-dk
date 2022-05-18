@@ -38,9 +38,13 @@ db.Sequelize = Sequelize;
 
 db.permission.hasMany(db.user);
 db.user.belongsTo(db.permission);
+
 db.user.hasMany(db.collection);
 db.collection.belongsTo(db.user);
 
+db.collection.hasMany(db.field);
+db.field.belongsTo(db.collection);
 
 
 module.exports = db;
+

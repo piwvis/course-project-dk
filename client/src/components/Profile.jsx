@@ -1,27 +1,27 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Button, Container, Grid, Stack} from "@mui/material";
+import {Button, Container, Grid, Stack, Typography} from "@mui/material";
 import BasicCard from "./BasicCard";
 import {StyledButton} from "./styled/StyledButton";
 import {Link} from "react-router-dom";
+import CollectionUserGrid from "./CollectionUserGrid";
 
 // display buttons or icon depends on auth status
-function Profile() {
+function Profile(props) {
     return (<Container>
             <Stack spacing={2}>
-                User Profile
-               <span>Username: "" Email: ""</span>
+                <Typography variant={"h6"}>User Profile</Typography>
+               <span>Username: {props.userName}</span>
+                <span>Email: {props.email}</span>
                 <span>Collections:</span>
             </Stack>
             <StyledButton><Link style={{textDecoration: 'none', color:'black'}} to="/createCollection">Create Collection</Link></StyledButton>
-            <Grid container >
-               <BasicCard></BasicCard>
-            </Grid>
+            <CollectionUserGrid/>
         </Container>
     );
 }
 const mapStateToProps = (state) => {
-    return {isAuth: state.auth.isAuth}
+    return {userName: state.auth.userName, email: state.auth.email}
 }
 
 export default connect(mapStateToProps, {})(Profile)
