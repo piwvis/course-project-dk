@@ -9,7 +9,7 @@ import collectionsReducer from "./collections-reducer";
 
 const persistConfig = {
     key: 'main-root',
-    storage,
+    storage
 }
 
 let reducers = combineReducers({

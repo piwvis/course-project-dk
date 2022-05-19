@@ -10,6 +10,8 @@ import DragDrop from "./DragDropImage/DragDrop";
 import {Button, Grid, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
 import {createCollection} from "../api/Api";
 import CollectionViewCard from "./CollectionViewCard";
+import {Navigate, useNavigate} from "react-router-dom";
+import {addCollection, getCollections} from "../redux/collections-reducer";
 
 function CollectionCreateForm(props) {
     const validationSchema = yup.object({
@@ -19,6 +21,8 @@ function CollectionCreateForm(props) {
     });
 
     let [imageId, setImage] = useState();
+
+    const navigate = useNavigate()
 
     let collectionData = {
         description: "",
@@ -33,8 +37,7 @@ function CollectionCreateForm(props) {
     let sendData = (data) => {
         data.image = imageId;
         data.userId = props.userId;
-        console.log(data)
-        createCollection(data);
+        props.addCollection(data);
     }
 
     const MyTextFieldDescription = ({value, placeholder, ...props}) => {
@@ -95,14 +98,13 @@ function CollectionCreateForm(props) {
         );
     };
 
-    return <> <Typography variant={"body2"}>New Collection</Typography> <Formik validationSchema={validationSchema} handleChange={(data) => console.log(data)}
-                      validateOnChange={true} initialValues={{
+    return <> <Typography variant={"body2"}>New Collection</Typography> <Formik validationSchema={validationSchema} validateOnChange={true} initialValues={{
         collectionName: "",
         description: "",
         image: "",
         topic: "Books",
         fields: [{fieldName: "Author", type: "string"}]
-    }} onSubmit={(data) => sendData(data)}>
+    }} onSubmit={(data) => {sendData(data); navigate('/profile') } }>
         {({handleSubmit, values, handleChange}) => (
             <Form onChange={handleChange} onSubmit={handleSubmit}>
                 <div><MyTextField placeholder={"Enter Collection Name: "} onChange={handleChange}
@@ -161,4 +163,4 @@ const mapStateToProps = (state) => {
     return {userId: state.auth.userId}
 }
 
-export default connect(mapStateToProps, {})(CollectionCreateForm)
+export default connect(mapStateToProps, {addCollection})(CollectionCreateForm)

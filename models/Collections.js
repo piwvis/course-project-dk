@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
        topic: {
            type: DataTypes.STRING,
            allowNull: false
+       },
+       itemsCount: {
+           type: DataTypes.INTEGER,
+           allowNull: false
        }
    })
     return Collections

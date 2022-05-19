@@ -3,6 +3,7 @@ import {AppBar, Button, Toolbar, InputBase, styled, Typography, Avatar, Box, Men
 import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {StyledButton} from "./styled/StyledButton";
+import {logOut} from "../redux/auth-reducer";
 
 const StyledToolbar = styled(Toolbar)({
     display: "flex",
@@ -29,7 +30,7 @@ function NavBar(props) {
                 <Search><InputBase placeholder={"search..."}/></Search>
                 <Interface>
                     {props.isAuth ? <><Avatar onClick={(e)=>setOpen(true)}/>
-                        <UserMenu open={open} setOpen={setOpen}/></>: <>
+                        <UserMenu logOut={props.logOut} open={open} setOpen={setOpen}/></>: <>
                         <StyledButton><Link style={{textDecoration: 'none', color: 'black'}} to="/login">Log In</Link></StyledButton>
                         <StyledButton><Link style={{textDecoration: 'none', color: 'black'}} to="/signup">Sign Up</Link></StyledButton>
                     </>}
@@ -55,11 +56,11 @@ const UserMenu = (props) => {
         }}
     >
         <MenuItem ><Link style={{textDecoration: 'none', color:'black'}} to="/profile">Profile</Link></MenuItem>
-        <MenuItem >Logout</MenuItem>
+        <MenuItem onClick={() => {props.logOut()}} >Logout</MenuItem>
     </Menu>)
 }
 const mapStateToProps = (state) => {
     return {isAuth: state.auth.isAuth}
 }
 
-export default connect(mapStateToProps, {})(NavBar)
+export default connect(mapStateToProps, {logOut})(NavBar)
