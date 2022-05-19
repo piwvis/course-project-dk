@@ -4,14 +4,12 @@ import {StyledButton} from "./styled/StyledButton"
 import React, {useState} from "react";
 import * as yup from "yup";
 import {connect} from "react-redux";
-import CollectionCreateView from "./CollectionViewCard";
 import {StyledTextFieldDescription} from "./styled/StyledTextFieldDescription";
 import DragDrop from "./DragDropImage/DragDrop";
-import {Button, Grid, InputLabel, MenuItem, Select, TextField, Typography} from "@mui/material";
-import {createCollection} from "../api/Api";
+import {Button, Grid, InputLabel, MenuItem, Select, Typography} from "@mui/material";
 import CollectionViewCard from "./CollectionViewCard";
-import {Navigate, useNavigate} from "react-router-dom";
-import {addCollection, getCollections} from "../redux/collections-reducer";
+import {useNavigate} from "react-router-dom";
+import {addCollection} from "../redux/collections-reducer";
 
 function CollectionCreateForm(props) {
     const validationSchema = yup.object({
@@ -20,7 +18,7 @@ function CollectionCreateForm(props) {
         fields: yup.array(yup.object({fieldName: yup.string().required('field name is required')}))
     });
 
-    let [imageId, setImage] = useState();
+    let [imageId, setImage] = useState("");
 
     const navigate = useNavigate()
 
@@ -37,6 +35,7 @@ function CollectionCreateForm(props) {
     let sendData = (data) => {
         data.image = imageId;
         data.userId = props.userId;
+        data.itemsCount= 0
         props.addCollection(data);
     }
 

@@ -10,6 +10,7 @@ import {getCollections} from "../redux/collections-reducer";
 function Profile(props) {
     useEffect(() => {
         props.getCollections(props.userId)
+        console.log(props.collections)
     }, []);
     return (<Container>
             <Stack spacing={2}>

@@ -8,8 +8,7 @@ import {useEffect, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {Image} from "cloudinary-react";
-import {Menu, MenuItem} from "@mui/material";
-import {Link, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 
 export default function CollectionViewCard(props) {
@@ -18,7 +17,7 @@ export default function CollectionViewCard(props) {
         setData(props.data)
     }, [props.data]);
     return ( <> { props.isViewCreate ? <><Card sx={{position: {xs: "static", sm: "absolute"}, margin: "5px", minWidth: 300, left: "900px", width: "200px", top: "100px"}}>
-            <CollectionCardContent imageId={props.imageId} data={data}/>
+            <CollectionCardContent imageId={""} data={data}/>
             <CardActions>
                 <Button size="small">Open</Button>
             </CardActions>

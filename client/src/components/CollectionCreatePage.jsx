@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Button, Container, Stack} from "@mui/material";
+import {Container, Stack} from "@mui/material";
 import CollectionCreateForm from "./CollectionCreateForm";
 
 // display buttons or icon depends on auth status

@@ -21,6 +21,7 @@ function App() {
                  <Route path="/profile" element={<Profile/>}/>
                  <Route path="/createCollection" element={<CollectionCreatePage/>}/>
                  <Route path="/home" element={<Content/>}/>
+                 <Route path="/" element={<Content/>}/>
              </Routes>
          </Stack>
      </Box>

@@ -40,7 +40,8 @@ app.post("/create_collection", async(req, res) => {
         topic: topic,
         description: description,
         image: image,
-        userId: userId
+        userId: userId,
+        itemsCount: 0
     })
     try {
         res.send(newCollection);
