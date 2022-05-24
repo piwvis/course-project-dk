@@ -1,24 +1,19 @@
 import {collectionsUserRequest, createCollection} from "../api/Api";
 
 const SET_COLLECTIONS = "SET_COLLECTIONS"
-const ADD_COLLECTION = "ADD_COLLECTION"
+const SET_FETCHING_STATUS = "SET_FETCHING_STATUS"
 
-let initialState = {collections: []};
+let initialState = {collections: [], isFetching: false};
 
 const collectionsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_COLLECTIONS: {
-            return {...state, collections: [...action.data]}
+            console.log(action.data)
+            return {collections: [...action.data]}
         }
-        case ADD_COLLECTION: {
-            return {...state, collections: [...state.collections,
-                    {name: action.data.collectionName,
-                    topic: action.data.topic,
-                    description: action.data.description,
-                    image: action.data.image,
-                    userId: action.data.userId,
-                    itemsCount: 0}]}
+        case SET_FETCHING_STATUS: {
+            return {...state, isFetching: action.data}
         }
         default:
             return state;
@@ -26,21 +21,19 @@ const collectionsReducer = (state = initialState, action) => {
 }
 
 export const setUpCollections= (data) => ({type: SET_COLLECTIONS, data})
-export const setUpCollection= (data) => ({type: ADD_COLLECTION, data})
+export const setUpFetch= (data) => ({type: SET_FETCHING_STATUS, data})
 
 export const getCollections = (data) => async (dispatch) => {
-    collectionsUserRequest(data).then(res => {
+   collectionsUserRequest(data).then(res => {
         dispatch(setUpCollections(res))
-        return res;
+        dispatch(setUpFetch(false))
     })
 }
 
 export const addCollection = (data) => async (dispatch) => {
     createCollection(data).then(res => {
-        dispatch(setUpCollection(data))
+        dispatch(setUpFetch(true))
     })
-
 }
-
 
 export default collectionsReducer;

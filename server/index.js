@@ -33,8 +33,7 @@ app.post("/register_user", async(req, res) => {
 
 
 app.post("/create_collection", async(req, res) => {
-    console.log(req.body)
-    const {name, topic, description, image, userId} = req.body
+    const {name, topic, description, image, userId, fields} = req.body
     const newCollection = await collection.create({
         name: name,
         topic: topic,
@@ -43,10 +42,20 @@ app.post("/create_collection", async(req, res) => {
         userId: userId,
         itemsCount: 0
     })
-    try {
+
+    for (const field1 of fields) {
+        const newField = await field.create({
+            type: field1.type,
+            name: field1.fieldName,
+            collectionId: newCollection.id
+        })
+    }
+
+    if(newCollection)
+    {
         res.send(newCollection);
-    } catch (error) {
-        res.status(500).send(error);
+    } else {
+        res.status(400).json({ error : "Password Incorrect" });
     }
 })
 
@@ -60,14 +69,34 @@ app.post('/select_collections',async(req,res)=>{
         }
 });
 
+app.post('/select_collection',async(req,res)=>{
+    const selectedCollection = await collection.findAll({ where : {id : req.body._id}});
+    if(selectedCollection)
+    {
+        res.send(selectedCollection);
+    } else {
+        res.status(400).json({ error : "Password Incorrect" });
+    }
+});
+
+app.post('/select_fields',async(req,res)=>{
+    const collectionFields = await field.findAll({ where : {collectionId : req.body._id}});
+    if(collectionFields)
+    {
+        res.send(collectionFields);
+    } else {
+        res.status(400).json({ error : "Password Incorrect" });
+    }
+});
+
+
 app.post("/create_fields", async(req, res) => {
-    console.log(req.body)
-    const {fields, collectionId} = req.body
+    const {fields, id} = req.body
     for (const field1 of fields) {
         const newField= await field.create({
             type: field1.type,
             name: field1.fieldName,
-            collectionId: collectionId
+            collectionId: id
         })
         try {
             res.send(newField);

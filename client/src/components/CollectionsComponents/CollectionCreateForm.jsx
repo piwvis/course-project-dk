@@ -1,15 +1,15 @@
 import {Field, FieldArray, Form, Formik, useField} from "formik";
-import {StyledTextField} from "./styled/StyledTextField"
-import {StyledButton} from "./styled/StyledButton"
+import {StyledTextField} from "../styled/StyledTextField"
+import {StyledButton} from "../styled/StyledButton"
 import React, {useState} from "react";
 import * as yup from "yup";
 import {connect} from "react-redux";
-import {StyledTextFieldDescription} from "./styled/StyledTextFieldDescription";
-import DragDrop from "./DragDropImage/DragDrop";
+import {StyledTextFieldDescription} from "../styled/StyledTextFieldDescription";
+import DragDrop from "../DragDropImage/DragDrop";
 import {Button, Grid, InputLabel, MenuItem, Select, Typography} from "@mui/material";
 import CollectionViewCard from "./CollectionViewCard";
 import {useNavigate} from "react-router-dom";
-import {addCollection} from "../redux/collections-reducer";
+import {addCollection} from "../../redux/collections-reducer";
 
 function CollectionCreateForm(props) {
     const validationSchema = yup.object({
@@ -22,22 +22,12 @@ function CollectionCreateForm(props) {
 
     const navigate = useNavigate()
 
-    let collectionData = {
-        description: "",
-        name: "",
-        topic: ""
-    };
+    let collectionData = {description: "", name: "", topic: ""};
 
-    let assignImageId = (imageId) => {
-        setImage(imageId);
-    }
+    let assignImageId = (imageId) => {setImage(imageId); console.log(imageId)}
 
-    let sendData = (data) => {
-        data.image = imageId;
-        data.userId = props.userId;
-        data.itemsCount= 0
-        props.addCollection(data);
-    }
+    let sendData = (data) => {data.image = imageId;data.userId = props.userId;
+        data.itemsCount= 0; props.addCollection(data);}
 
     const MyTextFieldDescription = ({value, placeholder, ...props}) => {
         const [field, meta] = useField(props);
@@ -47,6 +37,8 @@ function CollectionCreateForm(props) {
             <StyledTextFieldDescription multiline rows={3} placeholder={placeholder}{...field} helperText={errorText}
                                         error={!!errorText}/>);
     };
+
+
 
     const MyTextField = ({value, placeholder, ...props}) => {
         const [field, meta] = useField(props);

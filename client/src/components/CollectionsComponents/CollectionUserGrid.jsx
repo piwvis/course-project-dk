@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {connect} from "react-redux";
 import {Grid} from "@mui/material";
 import CollectionViewCard from "./CollectionViewCard";
 
@@ -15,8 +14,5 @@ function CollectionUserGrid(props) {
     </>
     );
 }
-const mapStateToProps = (state) => {
-    return {userId: state.auth.userId}
-}
 
-export default connect(mapStateToProps, {})(CollectionUserGrid)
+export default CollectionUserGrid

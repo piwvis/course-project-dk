@@ -17,8 +17,9 @@ module.exports = (sequelize, DataTypes) => {
            type: DataTypes.STRING,
            allowNull: false
        },
+       // change status on integer instead of string
        status: {
-           type: DataTypes.STRING,
+           type: DataTypes.INTEGER,
            allowNull: false
        }
    })

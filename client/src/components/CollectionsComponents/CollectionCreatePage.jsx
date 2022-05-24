@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {Container, Stack} from "@mui/material";
 import CollectionCreateForm from "./CollectionCreateForm";
 
-// display buttons or icon depends on auth status
 function CollectionCreatePage() {
     return (<Container>
             <Stack spacing={2}>

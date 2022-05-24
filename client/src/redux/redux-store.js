@@ -5,6 +5,7 @@ import usersReducer from "./users-reducer";
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import collectionsReducer from "./collections-reducer";
+import collectionReducer from "./collection-reducer";
 
 
 const persistConfig = {
@@ -13,7 +14,7 @@ const persistConfig = {
 }
 
 let reducers = combineReducers({
-    auth: authReducer, users: usersReducer, collectionsUser: collectionsReducer
+    auth: authReducer, users: usersReducer, collectionsUser: collectionsReducer, collectionUser: collectionReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers)

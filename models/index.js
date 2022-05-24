@@ -45,6 +45,12 @@ db.collection.belongsTo(db.user);
 db.collection.hasMany(db.field);
 db.field.belongsTo(db.collection);
 
+db.collection.hasMany(db.item);
+db.item.belongsTo(db.collection);
+
+db.tag.hasMany(db.item);
+db.item.belongsTo(db.tag);
+
 
 module.exports = db;
 

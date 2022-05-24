@@ -8,23 +8,25 @@ import {useEffect, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {Image} from "cloudinary-react";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 export default function CollectionViewCard(props) {
     const [data, setData] = useState(props.data)
+    let collectionId = props.data.id
     useEffect(() => {
         setData(props.data)
     }, [props.data]);
+    const navigate = useNavigate()
     return ( <> { props.isViewCreate ? <><Card sx={{position: {xs: "static", sm: "absolute"}, margin: "5px", minWidth: 300, left: "900px", width: "200px", top: "100px"}}>
-            <CollectionCardContent imageId={""} data={data}/>
+            <CollectionCardContent imageId={props.imageId} data={data}/>
             <CardActions>
                 <Button size="small">Open</Button>
             </CardActions>
         </Card></>  :  <Card sx={ {width: 300, margin: "5px"}}>
                 <CollectionCardContent imageId={props.imageId} data={data}/>
                 <CardActions>
-                    <Button onClick={() => {return <Navigate to={`/collection/${props.id}`} replace={true}/>}} size="small">Open</Button>
+                    <Button onClick={() => {navigate(`/collectionView/${collectionId}`)}} size="small">Open</Button>
                 </CardActions>
             </Card>
     }</>
