@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Grid} from "@mui/material";
 import CollectionViewCard from "./CollectionViewCard";
 
-function CollectionUserGrid(props) {
+function UserCollectionsList(props) {
     const [collections, setCollections] = useState(props.collections)
     useEffect(() => {
         setCollections(props.collections)
@@ -15,4 +15,4 @@ function CollectionUserGrid(props) {
     );
 }
 
-export default CollectionUserGrid
+export default UserCollectionsList

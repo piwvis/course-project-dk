@@ -10,6 +10,7 @@ import CollectionCreatePage from "./components/CollectionsComponents/CollectionC
 import Content from "./components/Content";
 import CollectionViewPage from "./components/CollectionsComponents/CollectionViewPage";
 import ItemCreatePage from "./components/ItemsComponents/ItemCreatePage";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
          <Stack direction={"row"} spacing={2} justifyContent={"center"} padding={10}>
              <Routes>
                  <Route path="/signup" element={<SignUp/>}/>
+                 <Route path="/adminPanel" element={<AdminPanel/>}/>
                  <Route path='/collectionView/:collectionId' element={<CollectionViewPage key={window.location.pathname}/>}/>
                  <Route path="/login" element={<LogIn/>}/>
                  <Route path="/profile" element={<Profile/>}/>

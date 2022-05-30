@@ -18,7 +18,7 @@ const usersReducer = (state = initialState, action) => {
         case CHECK_ALL_USERS: {
             let usersArray = []
             state.users.map(user => {
-                usersArray.push(user._id)
+                usersArray.push(user.id)
             })
             return {...state, selectedUsers: [...usersArray]}
         }
@@ -47,6 +47,7 @@ export const setUpUnCheckedAllUsers = (data) => ({type: UNCHECK_ALL_USERS, data}
 
 export const getUsers = () => async (dispatch) => {
     makeUsersRequest().then(res => {
+        console.log(res)
         dispatch(setUpUsers(res))
     })
 }

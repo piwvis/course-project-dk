@@ -23,7 +23,7 @@ const Interface = styled(Box)(({theme}) => ({
 
 // display buttons or icon depends on auth status
 function NavBar(props) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     return (<AppBar>
             <StyledToolbar>
                 <Typography variant={"h6"} sx={{display: {xs: "none", sm: "block"}}}>Hi!</Typography>
@@ -56,6 +56,7 @@ const UserMenu = (props) => {
         }}
     >
         <MenuItem ><Link style={{textDecoration: 'none', color:'black'}} to="/profile">Profile</Link></MenuItem>
+        <MenuItem><Link style={{textDecoration: 'none', color:'black'}} to="/adminPanel">Amin Panel</Link></MenuItem>
         <MenuItem onClick={() => {props.logOut()}} >Logout</MenuItem>
     </Menu>)
 }

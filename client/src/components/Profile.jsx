@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import {Container, Stack, Typography} from "@mui/material";
 import {StyledButton} from "./styled/StyledButton";
 import {Link} from "react-router-dom";
-import CollectionUserGrid from "./CollectionsComponents/CollectionUserGrid";
+import UserCollectionsList from "./CollectionsComponents/UserCollectionsList";
 import {useEffect} from "react";
-import {getCollections} from "../redux/collections-reducer";
+import {getCollections, getTags} from "../redux/collections-reducer";
 
 function Profile(props) {
     useEffect(() => {
-        props.getCollections(props.userId)
+        props.getCollections(props.userId);
+        props.getTags();
     }, [props.isFetching]);
     return (<Container>
             <Stack spacing={2}>
@@ -19,7 +20,7 @@ function Profile(props) {
                 <span>Collections:</span>
             </Stack>
             <StyledButton><Link style={{textDecoration: 'none', color:'black'}} to="/createCollection">Create Collection</Link></StyledButton>
-            { props.isFetching ? <span>Loading...</span> : <CollectionUserGrid collections={props.collections}/>}
+            { props.isFetching ? <span>Loading...</span> : <UserCollectionsList collections={props.collections}/>}
         </Container>
     );
 }
@@ -27,4 +28,4 @@ const mapStateToProps = (state) => {
     return { isFetching: state.collectionsUser.isFetching, userName: state.auth.userName, email: state.auth.email, collections: state.collectionsUser.collections, userId: state.auth.userId}
 }
 
-export default connect(mapStateToProps, {getCollections})(Profile)
+export default connect(mapStateToProps, {getCollections, getTags})(Profile)

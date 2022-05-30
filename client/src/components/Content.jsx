@@ -7,7 +7,7 @@ import {Search} from "@mui/icons-material"
 function Content() {
     return (<>
            <div>
-               Content
+              New Content
            </div>
         </>
     );

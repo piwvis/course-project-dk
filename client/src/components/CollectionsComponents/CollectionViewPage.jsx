@@ -1,6 +1,6 @@
 import React from "react";
 import {connect, useSelector} from "react-redux";
-import {Container, Grid, Stack, Typography} from "@mui/material";
+import {Container, Stack, Typography} from "@mui/material";
 import {StyledButton} from "../styled/StyledButton";
 import {useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
